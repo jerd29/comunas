@@ -14,7 +14,15 @@
                         </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
+                   <p>My entries:</p> 
+
+                   <ul>
+                        @foreach($consejoscomunales as $consejocomunal)
+                        <li>
+                            <a href="{{url('consejoscomunales/'.$consejocomunal->id)}}">{{ $consejocomunal->name}}</a>
+                        </li>
+                        @endforeach
+                   </ul>
                 </div>
             </div>
         </div>

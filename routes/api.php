@@ -17,3 +17,13 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+// Retorna los datos Por AJAX
+Route::get('integrantes', function () {
+    // return \App\Integrantes_ConsejoComunal::all();
+    return datatables()
+        ->eloquent(\App\Integrantes::query())
+        
+        ->toJson();
+});

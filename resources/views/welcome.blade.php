@@ -1,100 +1,90 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.app')
 
-        <title>Laravel</title>
+@section('content')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">{{ __('Bienvenido') }}</div>
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
+                <div class="card-body">
+                    <h2 class="text-center">Fines del Poder Popular</h2>
+                        <br>
+                    <ul>
+                        <li>
+                            <p>Impulsar el fortalecimiento de la organización del pueblo, en función de
+                            consolidar la democracia protagónica revolucionaria y construir las bases de la
+                            sociedad socialista, democrática, de derecho y de justicia. </p>
+                        </li>
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
+                        <li>
+                            <p>Generar las condiciones para garantizar que la iniciativa popular, en el
+                            ejercicio de la gestión social, asuma funciones, atribuciones y competencias de
+                            administración, prestación de servicios y ejecución de obras, mediante la
+                            transferencia desde los distintos entes político-territoriales hacia los
+                            autogobiernos comunitarios, comunales y los sistemas de agregación que de
+                            los mismos surjan.</p>
+                        </li>
 
-            .full-height {
-                height: 100vh;
-            }
+                        <li>
+                            <p>Fortalecer la cultura de la participación en los asuntos públicos para
+                            garantizar el ejercicio de la soberanía popular.</p>
+                        </li>
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
+                        <li>
+                            <p>Promover los valores y principios de la ética socialista: la solidaridad, el bien
+                            común, la honestidad, el deber social, la voluntariedad, la defensa y protección
+                            del ambiente y los derechos humanos. </p>
+                        </li>
 
-            .position-ref {
-                position: relative;
-            }
+                        <li>
+                            <p>Coadyuvar con las políticas de Estado en todas sus instancias, con la
+                            finalidad de actuar coordinadamente en la ejecución del Plan de Desarrollo
+                            Económico y Social de la Nación y los demás planes que se establezcan en
+                            cada uno de los niveles políticos-territoriales y las instancias políticoadministrativas que la ley establezca. </p>
+                        </li>
 
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
+                        <li>
+                            <p>Establecer las bases que permitan al pueblo organizado el ejercicio de la
+                            contraloría social para asegurar que la inversión de los recursos públicos se
+                            realice de forma eficiente para el beneficio colectivo; y vigilar que las
+                            actividades del sector privado con incidencia social se desarrollen en el marco
+                            de las normativas legales de protección a los usuarios y consumidores.</p>
+                        </li>
 
-            .content {
-                text-align: center;
-            }
+                        <li>
+                            <p>Profundizar la corresponsabilidad, la autogestión y la cogestión.</p>
+                        </li>
+                        
+                    </ul>
 
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
                 </div>
             </div>
         </div>
-    </body>
-</html>
+
+        <div class="col-md-6">
+        <div class="card-header mb-2">{{ __('Consejos Comunales') }}</div>
+        @foreach ($consejoscomunales as $consejocomunal)
+            <div class="card mb-4">
+
+                <p class="ml-2">{{ $consejocomunal->name}}</p>
+                <p class="ml-2">Cantidad de Familias: {{ $consejocomunal->familias}}</p>
+                <p class="ml-2">Creado por:
+                    <a href="{{url('users/'.$consejocomunal->created_by)}}">
+                        {{ $consejocomunal->user->name}}
+                    </a>
+                    </p>
+                <div class="card-footer">
+                    Situr: {{$consejocomunal->situr}}
+                </div>
+
+
+
+
+            </div>
+            @endforeach
+            {{$consejoscomunales->links()}}
+        </div>
+    </div>
+</div>
+@endsection
